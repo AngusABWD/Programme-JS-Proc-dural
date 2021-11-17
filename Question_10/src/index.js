@@ -1,4 +1,4 @@
-//definition des couleurs à découvrir (énigmes)
+
 let enigme;
 let partie;
 let tour;
@@ -9,6 +9,8 @@ let enigmeCouleur;
 let pionCouleur;
 let autrePionCouleur;
 let rouge = false;
+//Objet pour les compteurs de pion de chaque couleur qui permettrons de vérifier si des pions dans une ligne
+//placés au mauvais emplacement sont multiples
 class NombreDePion {
     constructor ( tab) {
         this.tab = tab;
@@ -26,6 +28,7 @@ class NombreDePion {
 let nombreDePionEnigme = new NombreDePion(tabEnigme);
 let nombreDePion = new NombreDePion(tabPionLigne);
 
+//Objet pour les couleur à découvrir ( Enigme )
 class Enigme {
     constructor(id) {
         this.id = id;
@@ -80,6 +83,7 @@ function dropZone(event,id) {
         }, 800);
     }
 }
+//Raz après dépot
 function dropEnd(event) {
     event.dataTransfer.clearData();
 }
@@ -95,6 +99,7 @@ function drop(event, idTest) {
     document.getElementById(id).appendChild(draggableElementClone);
     }
 }
+//les étapes du jeux ligne par ligne
 function jouer() {
     document.getElementById("valide").addEventListener("click", function() { 
         tourPrecedent(tour);
@@ -105,17 +110,20 @@ function jouer() {
         //passerautoursuivant()
     });
 }
+//Permet d'autoriser le dépot dans la ligne devenu courante
 function passerAuTour() {
     tabPion=[];
     for ( i=1; i<5; i++) {
     document.getElementById("affichage" + i + "-" + tour).classList.add("able");
     }
 }
+//Permet d'interdir le dépot dans la ligne devenu précédente
 function tourPrecedent(){
     for ( i=1; i<5; i++) {
     document.getElementById("affichage" + i + "-" + tour).classList.remove("able");
     }
 }
+//Raz du tableau de test des pions
 function effacerLesPions() {
     tabPion=[];
     for ( i=1; i<3; i++) {
@@ -127,6 +135,10 @@ function effacerLesPions() {
         }
     }
 }
+//créer un tableau TabPion qui retourne les valeur des pions suivant la régle du MasterMind
+// 2 si le piont est bien placé
+// 1 si il est à une autre place ( mais en vérifiant que le nombre de 1 soit egale au nombre de pions a découvrir pour la même couleur)
+// 0 si il n'est pas dans les pions à decouvrir ou si il y a deja le nombre de piont de cette couleur à decouvrir de compter
 function comparerLesPions() {
     for ( i=1; i<5; i++) {
         enigmeCouleur = document.querySelector("#enigme" + i + " div > div");
@@ -135,8 +147,6 @@ function comparerLesPions() {
         attribuerCouleurPion();
         tabEnigme[i-1] = enigmeCouleur;
         tabPionLigne[i-1] = pionCouleur;
-        console.log(tabEnigme);
-        console.log(tabPionLigne);
     }
     let compteurPionRouge = nombreDePion.test("rouge");
     let compteurEnigmeRouge = nombreDePionEnigme.test("rouge");
@@ -156,37 +166,122 @@ function comparerLesPions() {
             tabPion[i] = 2;
             compteurPionRouge = retraitPionValide("rouge", compteurPionRouge);
             compteurEnigmeRouge = retraitPionValide("rouge", compteurEnigmeRouge);
-            retraitPionValide("vert", compteurPionVert, compteurEnigmeVert);
-            retraitPionValide("jaune", compteurPionJaune, compteurEnigmeJaune);
-            retraitPionValide("bleu", compteurPionBleu, compteurEnigmeBleu);
-            retraitPionValide("blanc", compteurPionBlanc, compteurEnigmeBlanc);
-            retraitPionValide("violet", compteurPionViolet, compteurEnigmeViolet);
+            compteurPionVert = retraitPionValide("vert", compteurPionVert);
+            compteurEnigmeVert = retraitPionValide("vert", compteurEnigmeVert);
+            compteurPionJaune = retraitPionValide("jaune", compteurPionJaune);
+            compteurEnigmeJaune = retraitPionValide("jaune", compteurEnigmeJaune);
+            compteurPionBleu = retraitPionValide("bleu", compteurPionBleu);
+            compteurEnigmeBleu = retraitPionValide("bleu", compteurEnigmeBleu);
+            compteurPionBlanc = retraitPionValide("blanc", compteurPionBlanc);
+            compteurEnigmeBlanc = retraitPionValide("blanc", compteurEnigmeBlanc);
+            compteurPionViolet = retraitPionValide("violet", compteurPionViolet);
+            compteurEnigmeViolet = retraitPionValide("violet", compteurEnigmeViolet);
         }
         else {
             tabPion[i] = 0;
         }
-        console.log(tabPion);
-    }    
+    } 
+    //chaque boucle doit être effectuée après la fin de la précedente pour ne pas que les variables
+    // s'écrasent, ainsi nous ferons un test indépendant pour chaque couleur si l'element du tableau 
+    // n'est pas affecté ( 0 )    
     for ( i=0; i<4; i++) {
         if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++)
+            for ( j=0; j<4; j++) {
             if ( tabPionLigne[i] == tabEnigme[j] ) {
-                if ( tabPionLigne[i] == 'rouge') {
-                    if ( compteurPionRouge >= compteurEnigmeRouge ) {
-                        tabPion[i] = 0;
-                        compteurPionRouge = compteurPionRouge - 1 ;
-                    } 
-                    else {
-                        tabPion[i] = 1;
-                    }      
-                }
+                testerPion("rouge", compteurPionRouge, compteurEnigmeRouge);
+                compteurPionRouge = incrementerCompteur("rouge", compteurPionRouge);
             }
             else if ( tabPion[i] !=1 ) {
                 tabPion[i] = 0;
-            } 
+                }
+            }
+        }
+    }
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 0) {
+            for ( j=0; j<4; j++) {
+            if ( tabPionLigne[i] == tabEnigme[j] ) {
+                testerPion("vert", compteurPionVert, compteurEnigmeVert);
+                compteurPionVert = incrementerCompteur("vert", compteurPionVert);
+            }
+            else if ( tabPion[i] !=1 ) {
+                tabPion[i] = 0;
+                }
+            }
+        } 
+    }
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 0) {
+            for ( j=0; j<4; j++) {
+            if ( tabPionLigne[i] == tabEnigme[j] ) {
+                testerPion("jaune", compteurPionJaune, compteurEnigmeJaune);
+                compteurPionJaune = incrementerCompteur("jaune", compteurPionJaune);
+            }
+            else if ( tabPion[i] !=1 ) {
+                tabPion[i] = 0;
+                }
+            }
+        }
+    }
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 0) {
+            for ( j=0; j<4; j++) {
+            if ( tabPionLigne[i] == tabEnigme[j] ) {
+                testerPion("bleu", compteurPionBleu, compteurEnigmeBleu);
+                compteurPionBleu = incrementerCompteur("bleu", compteurPionBleu);
+            }
+            else if ( tabPion[i] !=1 ) {
+                tabPion[i] = 0;
+                }
+            }
+        } 
+    }
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 0) {
+            for ( j=0; j<4; j++) {
+            if ( tabPionLigne[i] == tabEnigme[j] ) {
+                testerPion("blanc", compteurPionBlanc, compteurEnigmeBlanc);
+                compteurPionBlanc = incrementerCompteur("blanc", compteurPionBlanc);
+            }
+            else if ( tabPion[i] !=1 ) {
+                tabPion[i] = 0;
+                }
+            }
+        }
+    }
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 0) {
+            for ( j=0; j<4; j++) {
+            if ( tabPionLigne[i] == tabEnigme[j] ) {
+                testerPion("violet", compteurPionViolet, compteurEnigmeViolet);
+                compteurPionViolet = incrementerCompteur("violet", compteurPionViolet);
+            }
+            else if ( tabPion[i] !=1 ) {
+                tabPion[i] = 0;
+                }
+            }
         } 
     }
 }
+//test si un pion à la mauvaise place existe en plusieurs exemplaires dans la proposition
+function testerPion (couleur, compteurPion, compteurEnigme) {
+    if ( tabPionLigne[i] == couleur ) {
+        if ( compteurPion > compteurEnigme ) {
+            tabPion[i] = 0;
+        } 
+        else {
+            tabPion[i] = 1;
+        }      
+    }
+}
+//Décompte le nombre de pion "disponible" dans la proposition
+function incrementerCompteur( couleur, compteurPion ) {
+    if ( tabPionLigne[i] == couleur) {
+        compteurPion = compteurPion - 1;
+    }
+    return compteurPion
+}
+//Décompte un pion valide du nombre de pion "disponible"
 function retraitPionValide(couleur, compteur) {
     if ( tabPionLigne[i] == couleur ) {
     compteur = compteur - 1;
@@ -262,6 +357,7 @@ function attribuerCouleurAutrePion() {
 //Début de partie
 document.getElementById("debut").addEventListener("click", function() { 
     effacerLesPions();
+    //cacher les enigmes
     enigme1.selection();
     enigme2.selection();
     enigme3.selection();
