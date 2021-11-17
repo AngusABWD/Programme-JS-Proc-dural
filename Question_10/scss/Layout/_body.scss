@@ -17,7 +17,8 @@
         height: $ball-size/2.5;
         background: black;
         border-radius: $ball-size/2.5 * 0.5;
-        margin: 0.5em;
+        margin: 0;
+        padding: 0;
     }
 }
 .box {
@@ -32,6 +33,7 @@
 .boxMin {
     width: $boxMin-size;
     height: $boxMin-size;
+    padding-left: 4px;
 }
 .rouge {
     background-color: red;
@@ -53,4 +55,16 @@
 }
 .z {
     z-index: 0;
+}
+.largeurPlateau {
+    width: 180px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.able {
+    transform: scale(1);
+    &:hover {
+        transform: scale(1.3);
+    }
 }
