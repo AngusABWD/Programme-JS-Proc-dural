@@ -1,14 +1,13 @@
-
+// ce jeux n'est pas conçu pour mobile ( glisser / coller )
 let enigme;
-let partie;
 let tour;
 let tabPion=[];
 let tabEnigme= [];
 let tabPionLigne = [];
 let enigmeCouleur;
 let pionCouleur;
-let autrePionCouleur;
-let rouge = false;
+const tabCouleur = ["rouge","vert","jaune","bleu","blanc","violet"];
+
 //Objet pour les compteurs de pion de chaque couleur qui permettrons de vérifier si des pions dans une ligne
 //placés au mauvais emplacement sont multiples
 class NombreDePion {
@@ -88,33 +87,56 @@ function dropEnd(event) {
     event.dataTransfer.clearData();
 }
 //permet de déposer un pion en retirant le précédent et de le cloner afin qu'il soit réutilisable
-function drop(event, idTest) {   
-    if ( document.getElementById(idTest).classList.contains("able")) {
-    const affichage = document.querySelector("#" + idTest + " > div");
-    affichage.remove();
+function drop(event, idCible) {   
+    if ( document.getElementById(idCible).classList.contains("able")) {
+    const affichage = document.querySelector("#" + idCible + " > div");  
     const id = event.dataTransfer.getData("text")
     const draggableElement = document.querySelector("#" + id + " > div");
     const draggableElementClone = draggableElement.cloneNode(false);
-    document.getElementById(idTest).appendChild(draggableElement);  
+    document.getElementById(idCible).appendChild(draggableElement);  
     document.getElementById(id).appendChild(draggableElementClone);
+    affichage.remove();
     }
 }
-//les étapes du jeux ligne par ligne
-function jouer() {
-    document.getElementById("valide").addEventListener("click", function() { 
-        tourPrecedent(tour);
-        comparerLesPions();
-        console.log(tabPion);
-       // voirsigagner();
-        //afficherlesResulat();
-        //passerautoursuivant()
-    });
+//Voir si on a gagner , perdu ou si on passe au tour suivant
+function testGagneOuFin() {
+    let compteBon = 0;
+    for ( i=0; i<4; i++ ) {
+        if ( tabPion[i] == 2 ) {
+            compteBon = compteBon + 1; 
+        }
+    }
+    if ( compteBon == 4 ) {
+        gagner();
+    }
+    else if ( tour == 12 ) {
+            perdu();
+        }
+        else {
+            tour = tour + 1;
+            passerAuTourSuivant(tour);
+        }
+}
+function perdu() {
+    document.getElementById("score").innerText = "Perdu";
+    document.getElementById("final").innerText= "PERDU !!";
+    document.getElementById("final").style.color = "red";
+    montrerEnigme();
+}
+function gagner() {
+    let score = 13 - tour;
+    document.getElementById("score").innerText = score;
+    document.getElementById("final").innerText= "GAGNÉ votre score : " + score;
+    document.getElementById("final").style.color = "green";
+    montrerEnigme();
 }
 //Permet d'autoriser le dépot dans la ligne devenu courante
-function passerAuTour() {
+function passerAuTourSuivant() {
     tabPion=[];
     for ( i=1; i<5; i++) {
     document.getElementById("affichage" + i + "-" + tour).classList.add("able");
+    document.getElementById("final").innerText= "Tour\nn° " + tour;
+    document.getElementById("final").style.color = "#9f653e";
     }
 }
 //Permet d'interdir le dépot dans la ligne devenu précédente
@@ -125,13 +147,25 @@ function tourPrecedent(){
 }
 //Raz du tableau de test des pions
 function effacerLesPions() {
+    document.getElementById("score").innerText = "";
+    document.getElementById("final").innerText= "";
     tabPion=[];
-    for ( i=1; i<3; i++) {
+    for ( i=1; i<13; i++) {
         for ( j=1; j<5; j++) {
             const affichage = document.querySelector("#affichage" + j + "-" + i + " > div");
             affichage.remove();
             const element = document.createElement("div");
             document.getElementById("affichage" + j + "-" + i).appendChild(element);
+        }
+    }
+    for ( i=1; i<13; i++) {
+        for ( j=1; j<5; j++) {
+        if ( document.getElementById("affichageMin" + j + "-" + i).classList.contains("rouge") ) {
+            document.getElementById("affichageMin" + j + "-" + i).classList.remove("rouge");
+        }
+        else if ( document.getElementById("affichageMin" + j + "-" + i).classList.contains("blanc") ) {
+                document.getElementById("affichageMin" + j + "-" + i).classList.remove("blanc");
+            }
         }
     }
 }
@@ -142,9 +176,9 @@ function effacerLesPions() {
 function comparerLesPions() {
     for ( i=1; i<5; i++) {
         enigmeCouleur = document.querySelector("#enigme" + i + " div > div");
-        attribuerCouleurEnigme();     
+        enigmeCouleur = attribuerCouleur(enigmeCouleur);     
         pionCouleur = document.querySelector("#affichage" + i + "-" + tour + " > div");
-        attribuerCouleurPion();
+        pionCouleur = attribuerCouleur(pionCouleur);
         tabEnigme[i-1] = enigmeCouleur;
         tabPionLigne[i-1] = pionCouleur;
     }
@@ -183,84 +217,26 @@ function comparerLesPions() {
     } 
     //chaque boucle doit être effectuée après la fin de la précedente pour ne pas que les variables
     // s'écrasent, ainsi nous ferons un test indépendant pour chaque couleur si l'element du tableau 
-    // n'est pas affecté ( 0 )    
+    // n'est pas affecté ( 0 )  
+    testPion("rouge",compteurPionRouge, compteurEnigmeRouge);
+    testPion("vert",compteurPionVert, compteurEnigmeVert);
+    testPion("jaune",compteurPionJaune, compteurEnigmeJaune);
+    testPion("bleu",compteurPionBleu, compteurEnigmeBleu);
+    testPion("blanc",compteurPionBlanc, compteurEnigmeBlanc);
+    testPion("violet",compteurPionViolet, compteurEnigmeViolet);
+}
+function testPion ( couleur, compteurPion, compteurEnigme) {
     for ( i=0; i<4; i++) {
         if ( tabPion[i] == 0) {
             for ( j=0; j<4; j++) {
             if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("rouge", compteurPionRouge, compteurEnigmeRouge);
-                compteurPionRouge = incrementerCompteur("rouge", compteurPionRouge);
+                testerPion(couleur, compteurPion, compteurEnigme);
             }
             else if ( tabPion[i] !=1 ) {
                 tabPion[i] = 0;
                 }
             }
         }
-    }
-    for ( i=0; i<4; i++) {
-        if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++) {
-            if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("vert", compteurPionVert, compteurEnigmeVert);
-                compteurPionVert = incrementerCompteur("vert", compteurPionVert);
-            }
-            else if ( tabPion[i] !=1 ) {
-                tabPion[i] = 0;
-                }
-            }
-        } 
-    }
-    for ( i=0; i<4; i++) {
-        if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++) {
-            if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("jaune", compteurPionJaune, compteurEnigmeJaune);
-                compteurPionJaune = incrementerCompteur("jaune", compteurPionJaune);
-            }
-            else if ( tabPion[i] !=1 ) {
-                tabPion[i] = 0;
-                }
-            }
-        }
-    }
-    for ( i=0; i<4; i++) {
-        if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++) {
-            if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("bleu", compteurPionBleu, compteurEnigmeBleu);
-                compteurPionBleu = incrementerCompteur("bleu", compteurPionBleu);
-            }
-            else if ( tabPion[i] !=1 ) {
-                tabPion[i] = 0;
-                }
-            }
-        } 
-    }
-    for ( i=0; i<4; i++) {
-        if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++) {
-            if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("blanc", compteurPionBlanc, compteurEnigmeBlanc);
-                compteurPionBlanc = incrementerCompteur("blanc", compteurPionBlanc);
-            }
-            else if ( tabPion[i] !=1 ) {
-                tabPion[i] = 0;
-                }
-            }
-        }
-    }
-    for ( i=0; i<4; i++) {
-        if ( tabPion[i] == 0) {
-            for ( j=0; j<4; j++) {
-            if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion("violet", compteurPionViolet, compteurEnigmeViolet);
-                compteurPionViolet = incrementerCompteur("violet", compteurPionViolet);
-            }
-            else if ( tabPion[i] !=1 ) {
-                tabPion[i] = 0;
-                }
-            }
-        } 
     }
 }
 //test si un pion à la mauvaise place existe en plusieurs exemplaires dans la proposition
@@ -268,18 +244,12 @@ function testerPion (couleur, compteurPion, compteurEnigme) {
     if ( tabPionLigne[i] == couleur ) {
         if ( compteurPion > compteurEnigme ) {
             tabPion[i] = 0;
+            compteurPion = compteurPion - 1;
         } 
         else {
             tabPion[i] = 1;
         }      
     }
-}
-//Décompte le nombre de pion "disponible" dans la proposition
-function incrementerCompteur( couleur, compteurPion ) {
-    if ( tabPionLigne[i] == couleur) {
-        compteurPion = compteurPion - 1;
-    }
-    return compteurPion
 }
 //Décompte un pion valide du nombre de pion "disponible"
 function retraitPionValide(couleur, compteur) {
@@ -288,82 +258,61 @@ function retraitPionValide(couleur, compteur) {
     }
     return compteur;
 }
-
+//affichage des indices dans le tableau latéral, afin de le faire de façon aléatoire
+//nous ferons en premier un mélange aléatoire du tableau tabPion
+//pour cela nous utiliserons l'agorithme de Fisher-Yates
+function afficherIndices() {
+    for ( i=3 ; i>0; i-- ) {
+        let j = Math.floor( Math.random() * ( i + 1));
+        [tabPion[i],tabPion[j]] = [tabPion[j],tabPion[i]];
+    } 
+    for ( i=0; i<4; i++) {
+        if ( tabPion[i] == 2 ) {
+            document.getElementById("affichageMin" + (i + 1) + "-" + tour).classList.add("rouge");
+        }
+        else if ( tabPion[i] == 1 ) {
+                document.getElementById("affichageMin" + (i + 1) + "-" + tour).classList.add("blanc");
+            }
+    }
+}
 
 //Fonction d'attribution d'une couleur à un element enfant
-//Nous sommes ici obligé de répeter le code, en effet la variable " element enfant " ne peux ni être utilisée brut pour une comparaison
-//Ni être utilisée comme un attribut d'une autre fonction ( si il y a une autre solution je suis preneur)
-//j'ai essayé de la transformer en string mais cela retourne "element.HTML"
-function attribuerCouleurEnigme() {
-    if ( enigmeCouleur.classList.contains("rouge")){
-        enigmeCouleur = "rouge";
+function attribuerCouleur(typeCouleur) {
+    let element = typeCouleur;
+    for ( j=0 ; j<6; j++) {
+        if ( element.classList.contains(tabCouleur[j])){
+            typeCouleur = tabCouleur[j];
+        } 
     }
-        else if ( enigmeCouleur.classList.contains("vert")){
-            enigmeCouleur = "vert";
-        }
-            else if ( enigmeCouleur.classList.contains("jaune")){
-                enigmeCouleur = "jaune";
-            }
-                else if ( enigmeCouleur.classList.contains("bleu")){
-                    enigmeCouleur = "bleu";
-                }
-                    else if ( enigmeCouleur.classList.contains("blanc")){
-                        enigmeCouleur = "blanc";
-                    }
-                        else if ( enigmeCouleur.classList.contains("violet")){
-                            enigmeCouleur = "violet";
-                        }
+    return typeCouleur;
 }
-function attribuerCouleurPion() {
-    if ( pionCouleur.classList.contains("rouge")){
-        pionCouleur = "rouge";
+function cacherEnigme() {
+    for ( i=1; i<5; i++) {
+        document.getElementById("enigme" + i ).style.opacity = 0;
     }
-        else if ( pionCouleur.classList.contains("vert")){
-            pionCouleur = "vert";
-        }
-            else if ( pionCouleur.classList.contains("jaune")){
-                pionCouleur = "jaune";
-            }
-                else if ( pionCouleur.classList.contains("bleu")){
-                    pionCouleur = "bleu";
-                }
-                    else if ( pionCouleur.classList.contains("blanc")){
-                        pionCouleur = "blanc";
-                    }
-                        else if ( pionCouleur.classList.contains("violet")){
-                            pionCouleur = "violet";
-                        }
 }
-function attribuerCouleurAutrePion() {
-    if ( autrePionCouleur.classList.contains("rouge")){
-        autrePionCouleur = "rouge";
+function montrerEnigme() {
+    for ( i=1; i<5; i++) {
+        document.getElementById("enigme" + i ).style.opacity = 1;
     }
-        else if ( autrePionCouleur.classList.contains("vert")){
-            autrePionCouleur = "vert";
-        }
-            else if ( autrePionCouleur.classList.contains("jaune")){
-                autrePionCouleur = "jaune";
-            }
-                else if ( autrePionCouleur.classList.contains("bleu")){
-                    autrePionCouleur = "bleu";
-                }
-                    else if ( autrePionCouleur.classList.contains("blanc")){
-                        autrePionCouleur = "blanc";
-                    }
-                        else if ( autrePionCouleur.classList.contains("violet")){
-                            autrePionCouleur = "violet";
-                        }
 }
 //Début de partie
 document.getElementById("debut").addEventListener("click", function() { 
     effacerLesPions();
-    //cacher les enigmes
+    cacherEnigme();
     enigme1.selection();
     enigme2.selection();
     enigme3.selection();
     enigme4.selection();
-    partie = true;
     tour = 1;
-    passerAuTour(tour);
-    jouer();
+    passerAuTourSuivant(tour);
+});
+//jouer
+document.getElementById("valide").addEventListener("click", function(event) { 
+    event.stopPropagation;
+    event.preventDefault;
+    tourPrecedent(tour);
+    comparerLesPions();
+    afficherIndices();
+    testGagneOuFin();
 });

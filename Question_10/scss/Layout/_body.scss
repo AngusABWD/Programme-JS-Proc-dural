@@ -1,39 +1,7 @@
-
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.ball {
-    width: $ball-size;
-    height: $ball-size;
-    background: black;
-    border-radius: $ball-size * 0.5;
-    &:hover {
-        transform: scale(1);
-    }
-    &-min {
-        width: $ball-size/2.5;
-        height: $ball-size/2.5;
-        background: black;
-        border-radius: $ball-size/2.5 * 0.5;
-        margin: 0;
-        padding: 0;
-    }
-}
-.box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $dark;
-    width: $box-size;
-    height: $box-size;
-    z-index: 2;
-}
-.boxMin {
-    width: $boxMin-size;
-    height: $boxMin-size;
-    padding-left: 4px;
 }
 .rouge {
     background-color: red;
@@ -56,15 +24,16 @@
 .z {
     z-index: 0;
 }
-.largeurPlateau {
-    width: 180px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
 .able {
+    background-color: black;
     transform: scale(1);
     &:hover {
         transform: scale(1.3);
     }
+}
+.float {
+    float: left;
+}
+.fs-7 {
+    font-size: 0.9em;
 }

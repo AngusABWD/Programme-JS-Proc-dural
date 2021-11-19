@@ -9,16 +9,67 @@
   </head>
 
   <body class="bg-light">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 text-center fst-italic fw-bold text-primary display-4">
+          <p class="my-5">Master Mind</p>
           <div class="text-white">
-            <button type="button" class="btn btn-primary" id="debut">Commencer une partie</button>
+            <button type="button" class="btn btn-primary btn-lg my-5" id="debut">Commencer une partie</button>
+            <button type="button" class="btn btn-primary btn-lg" id="valide">Valider la ligne</button>
+            <p id="final" class="display-2 fw-bold mt-5 ">      
+            </p>  
           </div>
         </div>
 <!--Container du jeu-->
-          <div class="col-12 col-sm-6 col-md-4 bg-secondary">
-            <div class="col border rounded border-primary border-4 bg-primary largeurPlateau">
+          <div class="col-12 col-sm-9 col-md-8 col-lg-5 col-xl-4 bg-secondary">
+            <div class="row">
+            <div class="col-12 col-sm-1 mt-5">
+              <div class="row my-5 ms-4">
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="rouge" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)"> 
+                  <div class="ball rouge"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="vert" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)"> 
+                    <div class="ball vert"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="jaune" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
+                    <div class="ball jaune"></div>                 
+                  </div>
+                </div>
+              </div>
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="bleu" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
+                    <div class="ball bleu"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="blanc" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
+                    <div class="ball blanc"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box bg-secondary">
+                <div class="border rounded-circle border-primary border-3 p-1 z">
+                  <div id="violet" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
+                    <div class="ball violet"></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-11 border rounded border-primary border-4 bg-primary largeurPlateau">
 <!--Container des pions de l'ordinateur-->
               <div class="row center">
                 <div class="box bg-primary">
@@ -50,11 +101,521 @@
                   </div>
                 </div>
                 <div class="box border-top border-bottom border-2 rounded border-primary">
-                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                  <div id="score" class="row center p-0 bg-secondary border rounded border-dark border-2 boxMin text-danger fw-bold">
                   </div>
                 </div>
               </div>
-<!--Lignes de proposition pour le joueur ( x 12)-->              
+<!--Lignes de proposition pour le joueur ( x 12)--> 
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-12" ondragover="dropZone(event,'affichage1-12')" ondrop="drop(event,'affichage1-12')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-12" ondragover="dropZone(event,'affichage2-12')" ondrop="drop(event,'affichage2-12')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-12" ondragover="dropZone(event,'affichage3-12')" ondrop="drop(event,'affichage3-12')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-12" ondragover="dropZone(event,'affichage4-12')" ondrop="drop(event,'affichage4-12')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-primary border-2">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-12" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-12" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-12" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-12" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-11" ondragover="dropZone(event,'affichage1-11')" ondrop="drop(event,'affichage1-11')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-11" ondragover="dropZone(event,'affichage2-11')" ondrop="drop(event,'affichage2-11')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-11" ondragover="dropZone(event,'affichage3-11')" ondrop="drop(event,'affichage3-11')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-11" ondragover="dropZone(event,'affichage4-11')" ondrop="drop(event,'affichage4-11')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-11" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-11" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-11" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-11" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-10" ondragover="dropZone(event,'affichage1-10')" ondrop="drop(event,'affichage1-10')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-10" ondragover="dropZone(event,'affichage2-10')" ondrop="drop(event,'affichage2-10')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-10" ondragover="dropZone(event,'affichage3-10')" ondrop="drop(event,'affichage3-10')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-10" ondragover="dropZone(event,'affichage4-10')" ondrop="drop(event,'affichage4-10')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-10" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-10" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-10" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-10" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-9" ondragover="dropZone(event,'affichage1-9')" ondrop="drop(event,'affichage1-9')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-9" ondragover="dropZone(event,'affichage2-9')" ondrop="drop(event,'affichage2-9')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-9" ondragover="dropZone(event,'affichage3-9')" ondrop="drop(event,'affichage3-9')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-9" ondragover="dropZone(event,'affichage4-9')" ondrop="drop(event,'affichage4-9')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-9" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-9" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-9" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-9" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-8" ondragover="dropZone(event,'affichage1-8')" ondrop="drop(event,'affichage1-8')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-8" ondragover="dropZone(event,'affichage2-8')" ondrop="drop(event,'affichage2-8')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-8" ondragover="dropZone(event,'affichage3-8')" ondrop="drop(event,'affichage3-8')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-8" ondragover="dropZone(event,'affichage4-8')" ondrop="drop(event,'affichage4-8')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-8" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-8" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-8" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-8" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-7" ondragover="dropZone(event,'affichage1-7')" ondrop="drop(event,'affichage1-7')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-7" ondragover="dropZone(event,'affichage2-7')" ondrop="drop(event,'affichage2-7')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-7" ondragover="dropZone(event,'affichage3-7')" ondrop="drop(event,'affichage3-7')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-7" ondragover="dropZone(event,'affichage4-7')" ondrop="drop(event,'affichage4-7')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-7" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-7" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-7" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-7" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-6" ondragover="dropZone(event,'affichage1-6')" ondrop="drop(event,'affichage1-6')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-6" ondragover="dropZone(event,'affichage2-6')" ondrop="drop(event,'affichage2-6')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-6" ondragover="dropZone(event,'affichage3-6')" ondrop="drop(event,'affichage3-6')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-6" ondragover="dropZone(event,'affichage4-6')" ondrop="drop(event,'affichage4-6')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-6" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-6" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-6" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-6" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-5" ondragover="dropZone(event,'affichage1-5')" ondrop="drop(event,'affichage1-5')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-5" ondragover="dropZone(event,'affichage2-5')" ondrop="drop(event,'affichage2-5')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-5" ondragover="dropZone(event,'affichage3-5')" ondrop="drop(event,'affichage3-5')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-5" ondragover="dropZone(event,'affichage4-5')" ondrop="drop(event,'affichage4-5')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-5" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-5" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-5" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-5" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-4" ondragover="dropZone(event,'affichage1-4')" ondrop="drop(event,'affichage1-4')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-4" ondragover="dropZone(event,'affichage2-4')" ondrop="drop(event,'affichage2-4')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-4" ondragover="dropZone(event,'affichage3-4')" ondrop="drop(event,'affichage3-4')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-4" ondragover="dropZone(event,'affichage4-4')" ondrop="drop(event,'affichage4-4')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-4" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-4" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-4" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-4" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row center">
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage1-3" ondragover="dropZone(event,'affichage1-3')" ondrop="drop(event,'affichage1-3')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage2-3" ondragover="dropZone(event,'affichage2-3')" ondrop="drop(event,'affichage2-3')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage3-3" ondragover="dropZone(event,'affichage3-3')" ondrop="drop(event,'affichage3-3')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box border-top border-2 border-primary">
+                  <div class="border rounded-circle border-secondary border-3 m-1">
+                    <div id="affichage4-3" ondragover="dropZone(event,'affichage4-3')" ondrop="drop(event,'affichage4-3')" class="ball">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin1-3" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">  
+                        <div id="affichageMin2-3" class="ball-min"></div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin3-3" class="ball-min"></div>
+                      </div>
+                      <div class="col-6 p-0 m-0">
+                        <div id="affichageMin4-3" class="ball-min"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="row center">
                 <div class="box border-top border-2 border-primary">
                   <div class="border rounded-circle border-secondary border-3 m-1">
@@ -156,56 +717,56 @@
                   </div>
                 </div>
               </div>
-
-            </div>
-          <div class="row center ">
-            <div class="box bg-secondary">
-              <div id="test" class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="rouge" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)"> 
-                <div class="ball rouge"></div>
-                </div>
-              </div>
-            </div>
-            <div class="box bg-secondary">
-              <div class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="vert" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)"> 
-                  <div class="ball vert"></div>
-                </div>
-              </div>
-            </div>
-            <div class="box bg-secondary">
-              <div class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="jaune" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
-                  <div class="ball jaune"></div>                 
-                </div>
-              </div>
-            </div>
-            <div class="box bg-secondary">
-              <div class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="bleu" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
-                  <div class="ball bleu"></div>
-                </div>
-              </div>
-            </div>
-            <div class="box bg-secondary">
-              <div class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="blanc" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
-                  <div class="ball blanc"></div>
-                </div>
-              </div>
-            </div>
-            <div class="box bg-secondary">
-              <div class="border rounded-circle border-primary border-3 p-1 z">
-                <div id="violet" draggable="true" ondragstart="dragStart(event)" ondragend="dropEnd(event)">
-                  <div class="ball violet"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-5">
-          <button type="button" class="btn btn-primary" id="valide">Valider la ligne</button>
-
+        <div class="col-12 col-md-12 col-lg-4 col-xl-5 text-dark">
+          <div id="regles">
+<h1 class="text-center text-primary text-decoration-underline">Règles du jeux</h1>
+<p class="text-left fs-7">Le Master Mind est un jeux de logique où vous devrez découvrir une combinaison de 4 pions en 12 tentatives.<br>
+Chaque pion peut avoir 6 couleurs différentes, vous pouvez retrouver plusieurs fois la même couleur dans la combinaison.</p>
+<h5 class="text-primary text-decoration-underline">Début de partie :</h5>
+<p class="text-left fs-7">Pour débuter une partie, appuyez sur le bouton "Commencer une partie", l'ordinateur vous dissimulera alors sa combinaison et vous permettra de faire votre première tentative,
+pour cela cliquez sur un pion de couleur sur le coté du tableau et faites le glisser sur un emplacement de la ligne active.<br />
+Si vous souhaitez changer, recommencez avec un pion d'une autre couleur. Lorsque vous voulez soumettre votre proposition de combinaison, appuyez sur le bouton "Valider la ligne". 
+Des indices sur votre proposition seront alors affichés dans le panneau en bout de ligne et vous pourrez passer à votre tentative suivante.</p>
+<h5 class="text-primary text-decoration-underline">Les indices :</h5>
+<p class="text-left fs-7 mb-0">
+Dans le panneau de bout de ligne vous aurez 4 points qui vous donnerons des informations sur votre combinaison proposée. ATTENTION l'ordre de ces indices ne correspond pas forcément
+à celui de votre combinaison et peut changer d'un tour à l'autre.</p>
+<div class="box float my-0 me-1">
+  <div class="row center bg-secondary border rounded border-dark border-2 boxMin">
+    <div class="row p-0 m-0">
+      <div class="col-6 p-0 m-0">
+        <div class="ball-min blanc"></div>
+      </div>
+      <div class="col-6 p-0 m-0">  
+        <div class="ball-min"></div>
+      </div>
+    </div>
+    <div class="row p-0 m-0">
+      <div class="col-6 p-0 m-0">
+        <div class="ball-min rouge"></div>
+      </div>
+      <div class="col-6 p-0 m-0">
+        <div class="ball-min blanc"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="text-left fs-7">Vous aurez comme indices un point rouge si vous avez un pion de la bonne couleur à la bonne place.
+  Un point blanc si vous avez un pion d'une bonne couleur mais à une mauvaise place. Un point noir si rien ne correspond.
+  Si vous avez proposé plusieurs pions d'une même couleur vous aurez autant de point indices que de pions correspondant dans la solution.
+  par exemple: vous proposez 3 pions jaunes et il y en a deux dans la solution, l'un est bien placé, les 2 autres non, vous aurez comme indices : 
+  1 point rouge et 1 point blanc; si 2 sur trois sont correctement placés 2 points rouges.
+</p>
+<h5 class="text-primary text-decoration-underline">Fin de partie :</h5>
+<p class="text-left fs-7">Si vous découvrez la bonne combinaison ( 4 points rouges ) avant la fin des 12 tours, c'est "GAGNÉ". Vous aurez alors votre score,
+  plus vous découvrez la solution rapidement, plus votre score est élevé&nbsp;!!. Si vous arrivez à la fin des 12 tours sans avoir découvert la solution, l'odinateur vous la révélera
+  et vous aurez perdu.
+  Vous pouvez, à tout moment, recommencer une partie avec le bouton: "Commencer une partie".
+</p>
+          </div>
         </div>
       </div>
     </div>
