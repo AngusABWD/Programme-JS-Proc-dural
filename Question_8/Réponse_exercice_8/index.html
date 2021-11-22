@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Exercice 8</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-5 bg-light">
+          <div class="row text-center text-white">
+            <div class="col">
+              <h1 class="shadow-text text-primary">LE JUSTE PRIX</h1>
+              <h2 class="shadow-text mt-3">Devinez le prix de l'article <br>entre 0 et 100 € <br> Vous avez 10 chances !</h2>
+              <button id="jouer" type="button" class="btn btn-primary">Jouer</button>      
+                <form id="form">
+                    <h3 class="mt-5">Combien coûte</h3>
+                    <h3 id="articleText"></h3>
+                    <div class="form-group center">
+                        <input class="form-control mb-5 wpx-50 mt-3" type="number" name="prixPropose" id="prixPropose">
+                    </div>
+                    <button id="prix" type="button" class="btn btn-primary mb-3">Tenter ma chance</button>             
+                </form>
+                <div class="shadow-text">
+                  <p id="affichage" class="mb-3 h1">
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div id="articlePhoto" class="col-12 col-lg-7 center bg-light">
+        </div>
+      </div>
+    </div>
+      <!--script Javascript-->
+      <script src="./src/index.js"></script>
+      <!--script pour Bootstrap-->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

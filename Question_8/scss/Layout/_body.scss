@@ -1,0 +1,35 @@
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wpx-50 {
+    width: 100px !important;
+}
+.shadow-text {
+    text-shadow: 0px 0px 20px white;
+}
+.gagne {
+    animation: cartoon 4s infinite alternate-reverse;
+}
+@keyframes cartoon {
+	0% {
+		transform: scale(0) rotate(720deg);
+		animation-timing-function: ease-in-out;
+	}
+	40% {
+		transform: scale(1) rotate(0deg);
+		animation-timing-function: ease-in-out;
+	}
+	50% {
+		transform: scale(1);
+	}
+	60% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0) rotate(720deg);
+		animation-timing-function: ease-in-out;	
+	}
+}
