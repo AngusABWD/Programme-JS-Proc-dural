@@ -4,30 +4,13 @@ let prix = 0;
 let tentative = 1;
 document.getElementById("prix").disabled = true;
 
-//retrait du devis du document
+//retrait de l'affichage du document
 function retirerAffichage() {
     const affichageArticle = document.querySelector("#articlePhoto > img ");
     affichageArticle.remove();
     document.getElementById("articleText").innerHTML = "";
     document.getElementById("affichage").innerHTML = "";  
 }
-document.getElementById("jouer").addEventListener("click", function(event) {
-    event.preventDefault();
-    document.getElementById("prix").disabled = false;
-    tentative = 1 ;
-    if ( afficher ) {      
-        retirerAffichage();
-        afficher = false;
-    }
-    determinerArticle ();
-});
-//collecte des informations du formulaire
-document.getElementById("prix").addEventListener("click", function(event) { 
-    event.preventDefault();
-    prixPropose = Math.floor(document.getElementById("prixPropose").value);
-    calculResultat();
-    tentative = tentative + 1;
-});
 // determination et affichage aléatoire de l'article et de son prix
 function determinerArticle() {
     let numeroArticle = Math.floor( Math.random() * 5 ) + 1;
@@ -56,6 +39,7 @@ function determinerArticle() {
         break;      
     }
 }
+//gestion de la proposition
 function calculResultat() {
     if ( tentative == 11 ) {
         perdu();
@@ -93,3 +77,21 @@ function gagner () {
     document.getElementById("form").reset();
     document.getElementById("prix").disabled = true;
 }
+//Début de partie
+document.getElementById("jouer").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.getElementById("prix").disabled = false;
+    tentative = 1 ;
+    if ( afficher ) {      
+        retirerAffichage();
+        afficher = false;
+    }
+    determinerArticle ();
+});
+//collecte des informations du formulaire
+document.getElementById("prix").addEventListener("click", function(event) { 
+    event.preventDefault();
+    prixPropose = Math.floor(document.getElementById("prixPropose").value);
+    calculResultat();
+    tentative = tentative + 1;
+});
