@@ -6,6 +6,7 @@ let tabEnigme= [];
 let tabPionLigne = [];
 let enigmeCouleur;
 let pionCouleur;
+let testEnigme = false;
 const tabCouleur = ["rouge","vert","jaune","bleu","blanc","violet"];
 
 //Objet pour les compteurs de pion de chaque couleur qui permettrons de vérifier si des pions dans une ligne
@@ -70,6 +71,7 @@ const enigme4 = new Enigme("enigme4");
 
 // fonction de gestion du glisser coller sur la ligne active "able"
 function dragStart(event) {
+    event.dataTransfer.clearData();
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 //Permet d'identifier une zone de dépot
@@ -82,12 +84,9 @@ function dropZone(event,id) {
         }, 800);
     }
 }
-//Raz après dépot
-function dropEnd(event) {
-    event.dataTransfer.clearData();
-}
 //permet de déposer un pion en retirant le précédent et de le cloner afin qu'il soit réutilisable
-function drop(event, idCible) {   
+function drop(event, idCible) { 
+    event.preventDefault();  
     if ( document.getElementById(idCible).classList.contains("able")) {
     const affichage = document.querySelector("#" + idCible + " > div");  
     const id = event.dataTransfer.getData("text")
@@ -126,7 +125,7 @@ function perdu() {
 function gagner() {
     let score = 13 - tour;
     document.getElementById("score").innerText = score;
-    document.getElementById("final").innerText= "GAGNÉ votre score : " + score;
+    document.getElementById("final").innerText= "GAGNÉ votre score   " + score;
     document.getElementById("final").style.color = "green";
     montrerEnigme();
 }
@@ -230,26 +229,38 @@ function testPion ( couleur, compteurPion, compteurEnigme) {
         if ( tabPion[i] == 0) {
             for ( j=0; j<4; j++) {
             if ( tabPionLigne[i] == tabEnigme[j] ) {
-                testerPion(couleur, compteurPion, compteurEnigme);
+                compteurPion = testerPion(couleur, compteurPion, compteurEnigme);        
             }
             else if ( tabPion[i] !=1 ) {
                 tabPion[i] = 0;
                 }
             }
+            if (testEnigme) {
+                compteurEnigme = compteurEnigme - 1;
+                testEnigme = false;
+              }  
         }
     }
 }
 //test si un pion à la mauvaise place existe en plusieurs exemplaires dans la proposition
 function testerPion (couleur, compteurPion, compteurEnigme) {
     if ( tabPionLigne[i] == couleur ) {
-        if ( compteurPion > compteurEnigme ) {
-            tabPion[i] = 0;
-            compteurPion = compteurPion - 1;
-        } 
+        if ( compteurPion != 0 && compteurEnigme != 0) {
+            if ( compteurPion > compteurEnigme ) {
+                tabPion[i] = 0;
+                compteurPion = compteurPion - 1;
+            } 
+            else {
+                tabPion[i] = 1;
+                testEnigme = true;
+
+            }  
+        }
         else {
-            tabPion[i] = 1;
-        }      
+            tabPion[i] = 0;
+        }    
     }
+    return compteurPion; 
 }
 //Décompte un pion valide du nombre de pion "disponible"
 function retraitPionValide(couleur, compteur) {
@@ -287,14 +298,10 @@ function attribuerCouleur(typeCouleur) {
     return typeCouleur;
 }
 function cacherEnigme() {
-    for ( i=1; i<5; i++) {
-        document.getElementById("enigme" + i ).style.opacity = 0;
-    }
+        document.getElementById("solution").style.opacity = 0;
 }
 function montrerEnigme() {
-    for ( i=1; i<5; i++) {
-        document.getElementById("enigme" + i ).style.opacity = 1;
-    }
+        document.getElementById("solution").style.opacity = 1;
 }
 //Début de partie
 document.getElementById("debut").addEventListener("click", function() { 
