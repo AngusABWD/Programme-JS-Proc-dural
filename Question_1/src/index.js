@@ -1,3 +1,15 @@
+if ( window.screen.availWidth < 768 ) {
+    document.getElementById("navbarContent").classList.add("collapse"); 
+}
+const collapse = () => {
+    if ( window.screen.availWidth < 768 ) {
+        document.getElementById("navbarContent").classList.add("collapse"); 
+    }
+    if ( window.screen.availWidth >= 768 ) {
+        document.getElementById("navbarContent").classList.remove("collapse"); 
+    }
+}
+window.onresize = collapse;
 let genre = "defaut";
 let age = 0;
 let boutonResulat = false;//pour savoir si un bouton de résulat est affiché ou non

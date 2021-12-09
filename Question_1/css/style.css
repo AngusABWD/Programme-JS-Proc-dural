@@ -11127,5 +11127,25 @@ textarea.form-control-lg {
 .wpx-50 {
   width: 75px !important;
 }
-
+.select {
+  color: white !important;
+}
+.h-20 {
+  height: 20%;
+}
+.h-80 {
+  height: 80%;
+}
+.w-70 {
+  width: 70%;
+}
+.px-25 {
+  padding-left: 0.25em;
+}
+body {
+  background-color: #495057;;
+}
+.bg-bann {
+  background-color: #343a40;
+}
 /*# sourceMappingURL=style.css.map */
