@@ -1,3 +1,4 @@
+// script pour le menu responsive
 if ( window.screen.availWidth < 768 ) {
     document.getElementById("navbarContent").classList.add("collapse"); 
 }
@@ -10,6 +11,7 @@ const collapse = () => {
     }
 }
 window.onresize = collapse;
+// Début de l'exercice
 let genre = "defaut";
 let age = 0;
 let boutonResulat = false;//pour savoir si un bouton de résulat est affiché ou non

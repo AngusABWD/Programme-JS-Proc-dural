@@ -1,3 +1,4 @@
+// script pour le menu responsive
 if ( window.screen.availWidth < 768 ) {
     document.getElementById("navbarContent").classList.add("collapse"); 
 }

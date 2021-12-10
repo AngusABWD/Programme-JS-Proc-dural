@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Exercice 1</title>
+    <title>Exercice 3</title>
   </head>
-
   <body>
     <div class="container">
       <div class="row">
-        <nav class="col-12 col-md-3 navbar-dark bg-dark">
+        <nav class="col-12 col-md-3  navbar-dark bg-dark">
           <div class="row text-white fs-4 text-center mb-4 center">
             <div class="col-5 col-md-12 col-lg-5 center"><img class="my-3" src="../Home/Image/Kalilou.png" alt="logo" width="70" height="70"/></div>
             <div class="col-1 col-md-12 col-lg-1 center">et</div>
@@ -27,14 +26,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../index.html">Home</a>
                     </li>
-                    <li class="nav-item active" >
-                      <a class="nav-link select" href="../Question_1/index.html">Exercice 1</a>
+                    <li class="nav-item" >
+                      <a class="nav-link" href="../Question_1/index.html">Exercice 1</a>
                     </li>
                     <li class="nav-item" >
                       <a class="nav-link" href="../Question_2/index.htm">Exercice 2</a>
                     </li>
-                    <li class="nav-item" >
-                      <a class="nav-link" href="../Question_3/index.html">Exercice 3</a>
+                    <li class="nav-item active" >
+                      <a class="nav-link  select" href="../Question_3/index.html">Exercice 3</a>
                     </li>
                     <li class="nav-item" >
                       <a class="nav-link" href="../Question_4/index.html">Exercice 4</a>
@@ -58,59 +57,56 @@
                       <a class="nav-link" href="../Question_10/index.html">Exercice 10</a>
                     </li>
                 </ul>
-                </div>
-            </nav>
+              </div>
+          </nav>
           <div class="col-12 col-md-9 p-0">
               <div class="bg-bann text-light center h-20">
-                <h1>Exercice 1</h1>
+                <h1>Exercice 3</h1>
               </div>
-            <div class="bg-white center h-80">
-              <div class="row h-100 w-100">
-                <div class="col-12 col-lg-6 bg-light">
-                  <div class="row text-center">
-                    <div class="col">
-                      <h1>Service des impôts Zorglubien</h1>
-                      <h2 class="mt-3">Etes vous imposable ?</h2>
-                        <form id="form">
-                            <div class="form-group">
-                            <h3 class="mt-3">Vous êtes :</h3>
-                              <div class="form-check center"> 
-                                <input class="form-check-input me-3" type="radio" name="genre" id="homme" value="homme">
-                                <label class="form-check-label px-25" for="homme">
-                                  Un homme
-                                </label>
+              <div class="bg-white center h-80">
+                <div class="row h-100 w-100">
+                  <div class="col-12 col-md-8 col-lg-7 col-xl-6 bg-dark">
+                    <div class="row text-center text-white">
+                      <div class="col">
+                        <h2 class="text-primary">Voyagez dans le futur !!</h2>
+                        <h3 class="mt-3 text-secondary">Quelle sera l'heure dans 1s ?</h3>
+                          <form id="form">
+                              <h4 class="mt-3">Entrez vos paramètres dans le convertisseur temporel</h4>
+                              <div class="form-group mt-3 ms-3">
+                                <label for="seconde" class="form-label">Seconde</label>
+                                <input type="range" class="form-range" min="0" max="59" step="1" id="seconde">
                               </div>
-                              <div class="form-check center"> 
-                                <input class="form-check-input me-3" type="radio" name="genre" id="femme" value="femme">
-                                <label class="form-check-label" for="femme">
-                                  Une femme
-                                </label>
-                            </div>
-                            </div>
-                            <h3 class="mt-5">Quel est votre âge :</h3>
-                            <div class="form-group center">
-                                <input class="form-control mb-3 wpx-50 mt-3" type="number" name="age" id="age">
-                            </div>
-                            <button id="savoir" type="submit" class="btn btn-primary mb-4">Savoir</button>             
-                          <div id="affichage" class="my-1">
+                              <div class="form-group ms-3">
+                                <label for="minute" class="form-label">Minute</label>
+                                <input type="range" class="form-range" min="0" max="59" step="1" id="minute">
+                              </div>
+                              <div class="form-group ms-3">
+                                <label for="heure" class="form-label">Heure</label>
+                                <input type="range" class="form-range" min="0" max="23" step="1" id="heure">
+                              </div>           
+                          </form>
+                        <div class="right">  
+                          <div id="affichageHeure" class="mt-5">
+                            <h3>Heure <span class="digital-7 display-2"><span id="heureP">00:</span><span id="minuteP">00:</span><span id="secondeP">00</span></span></h3>
                           </div>
-                      </form>
+                          <div id="affichageHeureFutur" class="mt-5 text-primary">
+                            <h3>Heure du futur
+                            <span class="digital-7 display-2 ms-3"><span id="heureF">00:</span><span id="minuteF">00:</span><span id="secondeF">00</span></span></h3>
+                          </div>
+                        </div> 
+                      </div>
                     </div>
                   </div>
+                  <div class="col-12 col-md-4 col-lg-5 col-xl-6 center bg-dark">
+                    <img class="w-75" src="./Image/back_to_f.jpg" alt="Photocopie"/>
+                  </div>
                 </div>
-                <div class="col-12 col-lg-6 h-100 center bg-white">
-                  <img class="w-70" src="./Image/zorglub.jpg" alt="zorglub"/>
-                </div>
-              </div>
+              </div>   
             </div>
           </div>
         </div>
-    </div>
-      <script src="../Home/JQuery_Dev/jquery-3.6.0.js"></script>
       <!--script Javascript-->
       <script src="./src/index.js"></script>
-
-
       <!--script pour Bootstrap-->
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
