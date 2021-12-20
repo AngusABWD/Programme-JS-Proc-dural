@@ -34,7 +34,7 @@
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
-  --bs-light: #6176b0;
+  --bs-light: #00a99e;
   --bs-dark: #212529;
   --bs-primary-rgb: 255, 165, 0;
   --bs-secondary-rgb: 255, 255, 0;
@@ -7677,7 +7677,7 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #00a99e!important;
 }
 
 .bg-dark {
@@ -11156,4 +11156,9 @@ body {
 .bg-bann {
   background-color: #343a40;
 }
+.text-lighter {
+  color: #00a99e;
+}
+
+
 /*# sourceMappingURL=style.css.map */

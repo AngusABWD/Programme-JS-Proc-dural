@@ -29,8 +29,8 @@
                     <li class="nav-item" >
                       <a class="nav-link" href="../Question_1/index.html">Exercice 1</a>
                     </li>
-                    <li class="nav-item active" >
-                      <a class="nav-link select" href="../Question_2/index.html">Exercice 2</a>
+                    <li class="nav-item" >
+                      <a class="nav-link" href="../Question_2/index.html">Exercice 2</a>
                     </li>
                     <li class="nav-item" >
                       <a class="nav-link" href="../Question_3/index.html">Exercice 3</a>
@@ -60,12 +60,63 @@
               </div>
           </nav>
           <div class="col-12 col-md-9 p-0">
-              <div class="bg-bann text-white center h-20">
-                <h1>Site en construction</h1>
+              <div class="bg-bann text-light center h-20">
+                <h1>Exercice 7</h1>
               </div>
               <div class="bg-white center h-80">
                 <div class="row h-100 w-100">
-                    <img src="./Image/AngusChantier.jpg" alt="Image Chantier"/>
+                  <div class="col-12 col-lg-8 bg-light">
+                    <div class="row text-center">
+                      <div class="col">
+                        <h2>Vérification du niveau d'un mot de passe</h2>
+                        <h3 class="mt-5">Entrez votre mot de passe</h3>
+                          <form class="center"> 
+                              <div class="form-floating w-50 mt-5">
+                                  <input class="form-control" type="text" name="motDePasse" id="motDePasse" placeholder="mot de passe">
+                                  <label for="motDePasse">mot de passe</label>
+                              </div>          
+                          </form>  
+                      </div>  
+                    <div class="row mt-3">
+                      <div class="col-12 col-md-3">
+                        <p class="fw-bold text-decoration-underline">Critères de sécurité :</p>
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <p id="minuscule" class="fw-bold text-danger">Caractère minuscule</p>
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <p id="majuscule" class="fw-bold text-danger">Caractère majuscule</p>
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <p id="special" class="fw-bold text-danger">Caractère spécial</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-md-3">
+          
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <p id="chiffre" class="fw-bold text-danger">Chiffre</p>
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <p id="longueur" class="fw-bold text-danger">longueur supérieure à 8 caractères</p>
+                      </div>
+                    </div>              
+                    <div class="row mt-3 mb-3">
+                      <div class="col-6 center">
+                        <p class="h2">Votre mot de passe est&nbsp;:</p>
+                      </div>
+                      <div id="affichage" class="col-6 center-l">
+                        <div>
+                          <p class="h1 text-danger">DANGEREUX</p>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-4 center bg-light">
+                    <img class="w-100" src="./Image/securite.jpg" alt="securite"/>
+                  </div>
                 </div>
               </div>   
             </div>
