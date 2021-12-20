@@ -12,9 +12,9 @@
       <div class="row">
         <nav class="col-12 col-md-3  navbar-dark bg-dark">
           <div class="row text-white fs-4 text-center mb-4 center">
-            <div class="col-5 col-md-12 col-lg-5 center"><img class="my-3" src="../Home/Image/Kalilou.png" alt="logo" width="70" height="70"/></div>
-            <div class="col-1 col-md-12 col-lg-1 center">et</div>
-            <div class="col-5 col-md-12 col-lg-5 center"><img class="mt-3" src="../Home/Image/Angus Tête.png" alt="logo" width="80" height="90"/></div>
+            <div class="col-5 col-md-12 col-lg-5 title-center"><img class="my-3" src="../Home/Image/Kalilou.png" alt="logo" width="70" height="70"/></div>
+            <div class="col-1 col-md-12 col-lg-1 title-center">et</div>
+            <div class="col-5 col-md-12 col-lg-5 title-center"><img class="mt-3" src="../Home/Image/Angus Tête.png" alt="logo" width="80" height="90"/></div>
             <p>Présentent</p> 
           </div>
                 <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,12 +60,49 @@
               </div>
           </nav>
           <div class="col-12 col-md-9 p-0">
-              <div class="bg-bann text-white center h-20">
-                <h1>Site en construction</h1>
+              <div class="bg-bann text-light title-center h-20">
+                <h1>Exercice 6</h1>
               </div>
               <div class="bg-white center h-80">
-                <div class="row h-100 w-100">
-                    <img src="./Image/AngusChantier.jpg" alt="Image Chantier"/>
+                <div class="row h-100 w-100 m-0">
+                  <div class="col-12 col-lg-8 col-xl-6 bg-light">
+                    <div class="row text-center">
+                      <div class="col">
+                        <h1>Assurances Web</h1>
+                        <h2 class="mt-3">Quel sera votre tarif ?</h2>
+                          <form id="form">
+                            <div class="form-group mt-5 me-5 center">
+                              <div class="row">
+                                <div class="col-12 col-sm-5 mb-sm-3 center">
+                                <label for="age" class="form-label h4">Age&nbsp;:</label>
+                                <input class="form-control ms-3 wpx-50" type="number" name="age" id="age">
+                                </div>
+                                <div class="col-12 col-sm-1"></div>
+                                <div class="col-12 col-sm-6 center">
+                                <label for="accident" class="form-label h4 ms-3">Nombre d'accidents&nbsp;:</label>
+                                <input class="form-control ms-3 wpx-50" type="number" name="accident" id="accident">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group mt-3 me-5 center text-left">
+                              <label for="permis" class="form-label h4">Nombre d'années de permis&nbsp;:</label>
+                              <input class="form-control ms-3 wpx-50" type="number" name="permis" id="permis">
+                          </div>
+                          <div class="form-group my-3 me-5 center">
+                            <label for="assurance" class="form-label h4">Années d'assurance chez Web&nbsp;:</label>
+                            <input class="form-control ms-3 wpx-50" type="number" name="assurance" id="assurance">
+                          </div>
+                              <button id="tarif" type="submit" class="btn btn-primary m-4">Obtenir mon tarif</button>             
+                        </form>
+                        <div id="affichage" class="my-3">
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-4 col-xl-6 center bg-white">
+                    <img class="w-100" src="./Image/assurance.jpg" alt="assurance"/>
+                  </div>
                 </div>
               </div>   
             </div>
