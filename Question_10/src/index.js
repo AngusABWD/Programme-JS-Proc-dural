@@ -323,3 +323,6 @@ document.getElementById("valide").addEventListener("click", function(event) {
     afficherIndices();
     testGagneOuFin();
 });
+if ( window.screen.availWidth < 992) {
+    window.location.href=("masterMindError.html");
+}

@@ -48,7 +48,7 @@ function determinerArticle() {
         document.getElementById("articleText").innerHTML = "cette guitare ?";
         break;
         case 5 : 
-        document.getElementById("articlePhoto").innerHTML = '<img class="w-100" src="./Image/sac-a-main.png" alt="sac"/>';
+        document.getElementById("articlePhoto").innerHTML = '<img class="w-100" src="./Image/sac-a-main.jpg" alt="sac"/>';
         document.getElementById("articleText").innerHTML = "ce sac à main ?";
         break;      
     }
